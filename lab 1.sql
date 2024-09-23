@@ -11,8 +11,10 @@ alter table users alter column isadmin set default false;
 alter table users add primary key (id);
 
 create table tasks (
-    id serial,    name varchar(50),
-    user_id integer);
+    id serial,
+    name varchar(50),
+    user_id integer
+);
 
 drop table tasks;
 drop database lab1;
