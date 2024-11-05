@@ -44,35 +44,38 @@ VALUES
     ('Jane', 'Smith', 'jane.smith@example.com', '555-5678', 80000, 2),
     ('Emily', 'Jones', 'emily.jones@example.com', '555-8765', 90000, 3);
 
-select employees.first_name, employees.last_name,
-       employees.department_id, d.department_name
-from employees
-join departments as d on employees.department_id = d.department_id;
-
-select employees.first_name, employees.last_name,
-       employees.department_id, d.department_name
-from employees
-join departments as d on employees.department_id = d.department_id
-where employees.department_id = 40 or employees.department_id = 80;
-
+-- 1
 select e.first_name, e.last_name,
-       e.department_id, l.city,
+       e.department_id, d.department_name
+from employees e
+join departments d on e.department_id = d.department_id;
+
+-- 2
+select e.first_name, e.last_name,
+       e.department_id, d.department_name
+from employees e
+join departments d on e.department_id = d.department_id
+where e.department_id = 40 or e.department_id = 80;
+
+-- 3
+select e.first_name, e.last_name,
+       d.department_id, l.city,
        l.state_province
 from employees e
-join departments d on d.department_id = e.department_id
-join locations l on l.location_id = d.location_id;
+join departments d on e.department_id = d.department_id
+join locations l on d.location_id = l.location_id;
 
-SELECT d.department_id,  d.department_name,
-    d.budget, l.city, l.state_province,
-    e.first_name, e.last_name
+-- 4
+select d.department_id, d.department_name, e.employee_id, e.first_name, e.last_name
 from departments d
-left join locations l ON d.location_id = l.location_id
-left join employees e ON d.department_id = e.department_id;
+left join employees e on d.department_id = e.department_id;
 
+-- 5
 select e.first_name, e.last_name,
     d.department_id, d.department_name
 from employees e
-left join departments d ON e.department_id = d.department_id;
+left join departments d on e.department_id = d.department_id;
+
 
 
 
